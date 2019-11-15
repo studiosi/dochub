@@ -1,4 +1,4 @@
-from django import models
+from django.db import models
 
 class Doctor(models.Model):
     """A model of a doctor."""
@@ -11,10 +11,10 @@ class Review(models.Model):
     start_time = models.DateTimeField()
     end_time = models.DateTimeField()
     patient_id = models.IntegerField()
-    comment = models.CharField()
+    comment = models.TextField()
     final_chosen_plan = models.IntegerField()
 
-class Doctor-review(models.Model):
+class DoctorReview(models.Model):
     """A model of relationship between doctor and reviewing case."""
     doctor_id = models.IntegerField()
     is_creator = models.BooleanField()
@@ -30,8 +30,8 @@ class Task(models.Model):
     start_time = models.DateTimeField()
     end_time = models.DateTimeField()
 
-class plan_comment(models.Model):
+class PlanComment(models.Model):
     """A model of a comment to a plan"""
     review_id = models.ForeignKey(Review, on_delete=models.CASCADE)
-    comment = models.CharField()
+    comment = models.TextField()
     plan_id = models.IntegerField()

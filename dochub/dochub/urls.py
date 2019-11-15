@@ -16,6 +16,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+import dhdata.doctorUtils as doctorUtils
+
 urlpatterns = [
+    # Admin
     path('admin/', admin.site.urls),
+
+    # Doctors
+    path('doctors/', doctorUtils.getDoctorList),
+    path('doctors/<int:id>', doctorUtils.manageDoctor),
 ]
+
