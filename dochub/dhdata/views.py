@@ -26,6 +26,6 @@ class TaskReviewViewSet(viewsets.ModelViewSet):
     queryset = Task.objects.all() 
     serializer_class = TaskSerializer
 
-class PlanCommentReviewViewSet(viewsets.ModelViewSet):
+class PlanCommentViewSet(viewsets.ModelViewSet):
     queryset = PlanComment.objects.all() 
     serializer_class = PlanCommentSerializer
