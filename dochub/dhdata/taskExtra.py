@@ -2,6 +2,7 @@ from .models import Task, TaskType, Doctor, Review
 from django.utils import timezone
 from braces.views import CsrfExemptMixin
 from jsonview.views import JsonView
+from .serializers import TaskSerializer
 
 def create_tasks_plan(doctor_id, plan_id, review_id):
     d = Doctor.objects.filter(pk=doctor_id)[0]
@@ -27,4 +28,12 @@ class ReviewCountTasksLeft(CsrfExemptMixin, JsonView):
             return { 'result' : c }
         except Exception:
             return { 'result' : 'ERR' }
-        
+
+class GetDoctorRemainingTasks(CsrfExemptMixin, JsonView):
+
+    def get(self, request, doctor_id):
+        t = Task.objects.filter(end_time__isnull=True) \
+                .filter(doctor_id=doctor_id)
+        ts = TaskSerializer(t, many=True)
+        return ts.data
+
