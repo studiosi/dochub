@@ -22,6 +22,7 @@ from dhdata import views
 router = routers.DefaultRouter()
 router.register(r'doctors', views.DoctorViewSet)
 router.register(r'reviews', views.ReviewViewSet)
+router.register(r'doctorreview', views.DoctorReviewViewSet)
 
 
 urlpatterns = [

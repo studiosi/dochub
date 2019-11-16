@@ -13,20 +13,20 @@ class Doctor(models.Model):
 class Review(models.Model):
     """A model of a reviewing case."""
     name = models.CharField(max_length=200)
-    start_time = models.DateTimeField()
-    end_time = models.DateTimeField()
+    start_time = models.DateTimeField(null=True)
+    end_time = models.DateTimeField(null=True)
     patient_id = models.IntegerField()
     comment = models.TextField()
-    final_chosen_plan = models.IntegerField()
+    final_chosen_plan = models.IntegerField(null=True)
 
     objects = models.Manager()
 
 class DoctorReview(models.Model):
     """A model of relationship between doctor and reviewing case."""
-    doctor_id = models.IntegerField()
+    doctor_id = models.ForeignKey(Doctor, on_delete=models.CASCADE)
     is_creator = models.BooleanField()
-    review_id = models.IntegerField()
-    chosen_plan_id = models.IntegerField()
+    review_id = models.ForeignKey(Review, on_delete=models.CASCADE)
+    chosen_plan_id = models.IntegerField(null=True)
 
     objects = models.Manager()
 
