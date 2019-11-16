@@ -18,7 +18,7 @@ from django.urls import path, include
 
 from rest_framework import routers
 from dhdata import views
-from dhdata import reviewExtra
+from dhdata import reviewExtra, taskExtra
 
 router = routers.DefaultRouter()
 router.register(r'doctors', views.DoctorViewSet)
@@ -36,6 +36,6 @@ urlpatterns = [
     # REVIEW
     path('reviews/create', reviewExtra.ReviewCreateExtra.as_view()),
     path('reviews/doctor', reviewExtra.ReviewAddDoctorExtra.as_view()),
-    #path('reviews/check', reviewExtra.ReviewAddDoctorExtra.as_view())
+    path('reviews/check/<int:review_id>', taskExtra.ReviewCountTasksLeft.as_view())
 ]
 

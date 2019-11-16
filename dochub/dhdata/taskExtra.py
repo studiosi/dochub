@@ -1,5 +1,7 @@
 from .models import Task, TaskType, Doctor, Review
 from django.utils import timezone
+from braces.views import CsrfExemptMixin
+from jsonview.views import JsonView
 
 def create_tasks_plan(doctor_id, plan_id, review_id):
     d = Doctor.objects.filter(pk=doctor_id)[0]
@@ -13,3 +15,16 @@ def create_tasks_plan(doctor_id, plan_id, review_id):
             start_time = timezone.now(),
         )
         t.save()
+
+class ReviewCountTasksLeft(CsrfExemptMixin, JsonView):
+
+    def get(self, request, review_id):
+        try:
+            c = Task.objects \
+                    .filter(review_id=review_id) \
+                    .filter(end_time__isnull=True) \
+                    .count()
+            return { 'result' : c }
+        except Exception:
+            return { 'result' : 'ERR' }
+        
