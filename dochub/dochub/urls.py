@@ -16,8 +16,6 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-import dhdata.doctorUtils as doctorUtils
-
 from rest_framework import routers
 from dhdata import views
 
@@ -28,9 +26,5 @@ router.register(r'reviews', views.ReviewViewSet)
 urlpatterns = [
     # Admin
     path('admin/', admin.site.urls),
-
-    # Doctors
-    path('doctors/', doctorUtils.getDoctorList),
-    path('doctors/<int:doctorid>', doctorUtils.manageDoctor),
 ]
 
