@@ -15,7 +15,7 @@ class Review(models.Model):
     name = models.CharField(max_length=200)
     start_time = models.DateTimeField(null=True)
     end_time = models.DateTimeField(null=True)
-    patient_id = models.IntegerField()
+    patient_id = models.CharField(max_length=200)
     comment = models.TextField()
     final_chosen_plan = models.IntegerField(null=True)
 
