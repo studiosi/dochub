@@ -24,6 +24,6 @@ urlpatterns = [
 
     # Doctors
     path('doctors/', doctorUtils.getDoctorList),
-    path('doctors/<int:id>', doctorUtils.manageDoctor),
+    path('doctors/<int:doctorid>', doctorUtils.manageDoctor),
 ]
 
