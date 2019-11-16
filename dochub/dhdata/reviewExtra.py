@@ -5,7 +5,7 @@ from django.utils import timezone
 from .taskExtra import create_tasks_plan
 from braces.views import CsrfExemptMixin
 from .models import Doctor, Review
-from .serializers import DoctorReviewSerializer
+from .serializers import DoctorReviewSerializer, TaskSerializer
 class ReviewCreateExtra(CsrfExemptMixin, JsonView):
 
     @transaction.atomic    
@@ -72,3 +72,10 @@ class GetDoctorReviews(CsrfExemptMixin, JsonView):
     def get(self, request, doctor_id):
         drs = DoctorReviewSerializer(DoctorReview.objects.filter(doctor_id=doctor_id), many=True)
         return drs.data
+
+class GetReviewTasks(CsrfExemptMixin, JsonView):
+    def get(self, request, review_id):
+        t = Task.objects.filter(review_id=review_id) \
+                .order_by('plan_id')
+        ts = TaskSerializer(t, many=True)
+        return ts.data
