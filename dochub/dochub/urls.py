@@ -23,6 +23,8 @@ router = routers.DefaultRouter()
 router.register(r'doctors', views.DoctorViewSet)
 router.register(r'reviews', views.ReviewViewSet)
 router.register(r'doctorreview', views.DoctorReviewViewSet)
+router.register(r'tasks', views.TaskReviewViewSet)
+router.register(r'plancomment', views.PlanCommentReviewViewSet)
 
 
 urlpatterns = [

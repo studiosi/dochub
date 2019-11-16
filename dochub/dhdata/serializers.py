@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Doctor,Review, DoctorReview
+from .models import Doctor, Review, DoctorReview, Task, PlanComment
 
 class DoctorSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
@@ -16,4 +16,14 @@ class DoctorReviewSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = DoctorReview
+        fields = ('__all__')
+
+class TaskSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Task
+        fields = ('__all__')
+
+class PlanCommentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PlanComment
         fields = ('__all__')
