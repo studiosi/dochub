@@ -3,34 +3,34 @@ from jsonview.views import JsonView
 from django.db import transaction
 from django.utils import timezone
 from .taskExtra import create_tasks_plan
+from braces.views import CsrfExemptMixin
+from .models import Doctor, Review
 
-class ReviewCreateExtra(JsonView):
+class ReviewCreateExtra(CsrfExemptMixin, JsonView):
 
-    @transaction.atomic
+    @transaction.atomic    
     def post(self, request):
         try:
             with transaction.atomic():
                 # Create review
                 r = Review(
                     name = request.POST['name'],
-                    start_time = timezone.now,
-                    end_time = None,
+                    start_time = timezone.now(),
                     patient_id = request.POST['patient_id'],
-                    comment = request.POST['comment'],
-                    final_chosen_plan = None
+                    comment = request.POST['comment']
                 )
-                review_id = r.save().id
+                r.save()
+                review_id = r.pk
                 doctor_id = request.POST['doctor_id']
                 # Create doctor review
                 dr = DoctorReview(
-                    doctor_id = doctor_id,
+                    doctor_id = Doctor.objects.filter(pk=doctor_id)[0],
                     is_creator = True,
-                    review_id = review_id,
-                    chosen_plan_id = None
+                    review_id = Review.objects.filter(pk=review_id)[0],
                 )
                 dr.save()
                 # Create tasks
-                te.create_tasks_plan(
+                create_tasks_plan(
                     doctor_id,
                     request.POST['plan_id'],
                     review_id
@@ -39,7 +39,7 @@ class ReviewCreateExtra(JsonView):
         except Exception:
             return { 'result' : 'ERR' }
 
-class ReviewAddDoctorExtra(JsonView):
+class ReviewAddDoctorExtra(CsrfExemptMixin, JsonView):
 
     @transaction.atomic
     def post(self, request):
@@ -47,16 +47,17 @@ class ReviewAddDoctorExtra(JsonView):
             with transaction.atomic():                
                 # Create doctor review
                 doctor_id = request.POST['doctor_id']
+                d = Doctor.objects.filter(pk=doctor_id)[0]
                 review_id = request.POST['review_id']
+                r = Review.objects.filter(pk=review_id)[0]
                 dr = DoctorReview(
-                    doctor_id = doctor_id,
+                    doctor_id = d,
                     is_creator = False,
-                    review_id = review_id,
-                    chosen_plan_id = None
+                    review_id = r,
                 )
                 dr.save()
                 # Create tasks
-                te.create_tasks_plan(
+                create_tasks_plan(
                     doctor_id,
                     request.POST['plan_id'],
                     review_id

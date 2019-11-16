@@ -34,7 +34,7 @@ urlpatterns = [
     # REST API URLs
     path('', include(router.urls)),
     # REVIEW
-    path('reviews/create', reviewExtra.ReviewCreateExtra),
-    path('reviews/doctor', reviewExtra.ReviewAddDoctorExtra),
+    path('reviews/create', reviewExtra.ReviewCreateExtra.as_view()),
+    path('reviews/doctor', reviewExtra.ReviewAddDoctorExtra.as_view()),
 ]
 

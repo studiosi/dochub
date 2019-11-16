@@ -17,7 +17,7 @@ class Review(models.Model):
     start_time = models.DateTimeField(null=True)
     end_time = models.DateTimeField(null=True)
     patient_id = models.CharField(max_length=200)
-    comment = models.TextField()
+    comment = models.TextField(null=True)
     final_chosen_plan = models.IntegerField(null=True)
 
     objects = models.Manager()
@@ -48,10 +48,10 @@ class Task(models.Model):
     task_type = models.CharField(max_length=200)
     doctor_id = models.ForeignKey(Doctor, on_delete=models.CASCADE, related_name="doctor_profile")
     helper_id = models.ForeignKey(Doctor, on_delete=models.CASCADE, related_name="helper_doctor_profile", null=True)
-    plan_id = models.IntegerField()
+    plan_id = models.CharField(max_length=200)
     review_id = models.ForeignKey(Review, on_delete=models.CASCADE)
     start_time = models.DateTimeField()
-    end_time = models.DateTimeField()
+    end_time = models.DateTimeField(null=True)
 
     objects = models.Manager()
 
