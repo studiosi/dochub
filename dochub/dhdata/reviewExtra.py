@@ -67,3 +67,8 @@ class ReviewAddDoctorExtra(CsrfExemptMixin, JsonView):
                 return { 'result' : 'OK' }
         except Exception:
             return { 'result' : 'ERR' }
+
+class GetDoctorReviews(CsrfExemptMixin, JsonView):
+    
+    def get(self, request, doctor_id):
+        pass

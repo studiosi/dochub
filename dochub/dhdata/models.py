@@ -27,7 +27,7 @@ class DoctorReview(models.Model):
     doctor_id = models.ForeignKey(Doctor, on_delete=models.CASCADE)
     is_creator = models.BooleanField()
     review_id = models.ForeignKey(Review, on_delete=models.CASCADE)
-    chosen_plan_id = models.IntegerField(null=True)
+    chosen_plan_id = models.CharField(max_length=200, null=True)
 
     objects = models.Manager()
 
