@@ -46,7 +46,8 @@ class TaskType(Enum):
 class Task(models.Model):
     """A model of a task"""
     task_type = models.CharField(max_length=200)
-    doctor_id = models.ForeignKey(Doctor, on_delete=models.CASCADE)
+    doctor_id = models.ForeignKey(Doctor, on_delete=models.CASCADE, related_name="doctor_profile")
+    helper_id = models.ForeignKey(Doctor, on_delete=models.CASCADE, related_name="helper_doctor_profile")
     plan_id = models.IntegerField()
     review_id = models.ForeignKey(Review, on_delete=models.CASCADE)
     start_time = models.DateTimeField()
