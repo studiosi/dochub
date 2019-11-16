@@ -1,4 +1,5 @@
 from django.db import models
+from enum import Enum
 
 class Doctor(models.Model):
     """A model of a doctor."""
@@ -29,6 +30,18 @@ class DoctorReview(models.Model):
     chosen_plan_id = models.IntegerField(null=True)
 
     objects = models.Manager()
+
+
+class TaskType(Enum):
+    REGION_CONTOUR_CHECK = 0,
+    DOSE_DEVIATION_CHECK = 1,
+    GEOMETRIES_DEVIATION_CHECK = 2,
+    MONITOR_UNITS_CHECK = 3,
+    DOSE_DISTRIBUTION_CHECK = 4,
+    CRITICAL_ORGAN_METRICS_CHECK = 5,
+    OPTIMALITY_CHECK = 6,
+    ROBUSTNESS_CHECK = 7,
+    SAFETY_CHECK = 8
 
 class Task(models.Model):
     """A model of a task"""
