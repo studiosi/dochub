@@ -36,5 +36,6 @@ urlpatterns = [
     # REVIEW
     path('reviews/create', reviewExtra.ReviewCreateExtra.as_view()),
     path('reviews/doctor', reviewExtra.ReviewAddDoctorExtra.as_view()),
+    #path('reviews/check', reviewExtra.ReviewAddDoctorExtra.as_view())
 ]
 
