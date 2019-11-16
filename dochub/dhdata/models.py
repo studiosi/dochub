@@ -19,12 +19,16 @@ class Review(models.Model):
     comment = models.TextField()
     final_chosen_plan = models.IntegerField()
 
+    objects = models.Manager()
+
 class DoctorReview(models.Model):
     """A model of relationship between doctor and reviewing case."""
     doctor_id = models.IntegerField()
     is_creator = models.BooleanField()
     review_id = models.IntegerField()
     chosen_plan_id = models.IntegerField()
+
+    objects = models.Manager()
 
 class Task(models.Model):
     """A model of a task"""
@@ -35,8 +39,12 @@ class Task(models.Model):
     start_time = models.DateTimeField()
     end_time = models.DateTimeField()
 
+    objects = models.Manager()
+
 class PlanComment(models.Model):
     """A model of a comment to a plan"""
     review_id = models.ForeignKey(Review, on_delete=models.CASCADE)
     comment = models.TextField()
     plan_id = models.IntegerField()
+
+    objects = models.Manager()
