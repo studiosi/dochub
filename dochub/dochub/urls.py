@@ -39,7 +39,7 @@ urlpatterns = [
     path('reviews/doctor/<int:doctor_id>', reviewExtra.GetDoctorReviews.as_view()),
     path('reviews/check/<int:review_id>', taskExtra.ReviewCountTasksLeft.as_view()),
     path('tasks/doctor/<int:doctor_id>', taskExtra.GetDoctorRemainingTasks.as_view()),
-    path('reviews/task/<int:review_id>', reviewExtra.GetReviewTasks.as_view())
+    path('tasks/review/<int:review_id>', reviewExtra.GetReviewTasks.as_view())
 
 ]   
 
