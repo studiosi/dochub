@@ -57,11 +57,13 @@ class ReviewAddDoctorExtra(CsrfExemptMixin, JsonView):
                 )
                 dr.save()
                 # Create tasks
-                create_tasks_plan(
-                    doctor_id,
-                    request.POST['plan_id'],
-                    review_id
-                )
+                plan_ids = request.post['plan_ids'].split(',')
+                for plan_id in plan_ids:
+                    create_tasks_plan(
+                        doctor_id,
+                        plan_id,
+                        review_id
+                    )
                 return { 'result' : 'OK' }
         except Exception:
             return { 'result' : 'ERR' }
