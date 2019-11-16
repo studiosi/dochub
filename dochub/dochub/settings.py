@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'dhdata.apps.DhdataConfig',
+    'django.contrib.staticfiles',
     'rest_framework'
 ]
 
@@ -62,7 +63,7 @@ TEMPLATES = [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
+                'django.contrib.messages.context_processors.messages',                
             ],
         },
     },
@@ -114,4 +115,4 @@ USE_L10N = True
 
 USE_TZ = True
 
-DISABLE_COLLECTSTATIC=1
+STATIC_URL = '/static/'

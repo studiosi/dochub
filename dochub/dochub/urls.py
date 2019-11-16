@@ -18,6 +18,7 @@ from django.urls import path, include
 
 from rest_framework import routers
 from dhdata import views
+from dhdata import reviewExtra
 
 router = routers.DefaultRouter()
 router.register(r'doctors', views.DoctorViewSet)
@@ -32,5 +33,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     # REST API URLs
     path('', include(router.urls)),
+    # REVIEW
+    path('reviews/create', reviewExtra.ReviewCreateExtra),
+    path('reviews/doctor', reviewExtra.ReviewAddDoctorExtra),
 ]
 
