@@ -23,8 +23,11 @@ router = routers.DefaultRouter()
 router.register(r'doctors', views.DoctorViewSet)
 router.register(r'reviews', views.ReviewViewSet)
 
+
 urlpatterns = [
     # Admin
     path('admin/', admin.site.urls),
+    # REST API URLs
+    path('', include(router.urls)),
 ]
 

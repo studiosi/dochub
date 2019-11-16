@@ -38,7 +38,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'dhdata.apps.DhdataConfig',
-
     'rest_framework'
 ]
 
